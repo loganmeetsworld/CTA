@@ -22,3 +22,4 @@
 
 # Ignore yml
 config/database.yml
+.env

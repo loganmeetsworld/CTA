@@ -14,7 +14,7 @@ def create_routes(file)
         unless route_number == ''
           route_number.gsub!(' ','')
           route = Route.where(route_number: route_number).first_or_create!
-          RoutesStops.create!(stop_id: Stop.find_by(stop_id: row[0]).id, route_id: route.id)
+          RoutesStop.create!(stop_id: Stop.find_by(stop_id: row[0]).id, route_id: route.id)
         end
       end
     end

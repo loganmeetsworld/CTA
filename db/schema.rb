@@ -10,25 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160715000520) do
+ActiveRecord::Schema.define(version: 20160717050901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "route_stops", id: false, force: :cascade do |t|
+    t.integer  "stop_id"
+    t.integer  "route_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["route_id"], name: "index_route_stops_on_route_id", using: :btree
+    t.index ["stop_id"], name: "index_route_stops_on_stop_id", using: :btree
+  end
 
   create_table "routes", force: :cascade do |t|
     t.string   "route_number"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.index ["route_number"], name: "index_routes_on_route_number", using: :btree
-  end
-
-  create_table "routes_stops", id: false, force: :cascade do |t|
-    t.integer  "stop_id"
-    t.integer  "route_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["route_id"], name: "index_routes_stops_on_route_id", using: :btree
-    t.index ["stop_id"], name: "index_routes_stops_on_stop_id", using: :btree
+    t.index ["route_number"], name: "index_routes_on_route_number", unique: true, using: :btree
   end
 
   create_table "stops", force: :cascade do |t|
@@ -39,12 +39,12 @@ ActiveRecord::Schema.define(version: 20160715000520) do
     t.integer  "alightings"
     t.string   "month_beginning"
     t.string   "daytype"
-    t.string   "location"
-    t.float    "latitude"
-    t.float    "longitude"
+    t.decimal  "latitude",        precision: 10, scale: 6
+    t.decimal  "longitude",       precision: 10, scale: 6
     t.string   "routes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["stop_id"], name: "index_stops_on_stop_id", unique: true, using: :btree
   end
 
 end

@@ -5,6 +5,5 @@ class CreateRoutes < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
-    add_index :routes, :route_number
   end
 end

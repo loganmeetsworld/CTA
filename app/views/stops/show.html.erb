@@ -1,0 +1,35 @@
+<div id="back"><%= link_to "<- Back", root_path %></div>
+<h3>Stop Number <%= @stop.stop_id %> on <%= @stop.on_street.titlecase %> and <%= @stop.cross_street.titlecase %><br><small>Routes: <%= @stop.routes.pluck(:route_number).join(', ') %></small></h3>
+<div id="stopmap"></div>
+
+
+<script>
+  $(document).ready(function() {
+    var map = new L.Map('stopmap');
+      var googleLayer = new L.Google('ROADMAP');
+      map.addLayer(googleLayer);
+
+    map.fitBounds([
+      [gon.min_lat, gon.min_lon],
+      [gon.max_lat, gon.max_lon]
+    ]);
+
+    googleLayer = new L.Google("TERRAIN");
+    map.addLayer(googleLayer);
+    var coodrinates_array = gon.coordinates_array;
+    L.marker([gon.your_stop[0], gon.your_stop[1]]).addTo(map)
+      .bindPopup(gon.your_stop[2] + ' and ' + gon.your_stop[3])
+      .openPopup();
+    coodrinates_array.forEach(function(markers, idx) {
+      for (var i= 0; i < markers.length; i++) {
+        var lat = markers[i][0];
+        var lon = markers[i][1];
+        L.circle([lat, lon], 40, {
+            color: colors_array[idx],
+            fillColor: colors_array[idx],
+            fillOpacity: 1
+        }).addTo(map);
+      };
+    });
+  });
+</script>

@@ -1,0 +1,9 @@
+<div class="stops-search">
+  <h2>Search Stops<br><small>Map all stops on a given route and visualize their locations by alignments and boardings.</small></h2>
+  <input type="text" id="stops-search-txt" autofocus>
+  <div class="results" id="stops-search-results"></div>
+</div>
+
+<%= content_for :script do %>
+  new app.Stops;
+<% end %>

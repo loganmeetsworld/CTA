@@ -1,0 +1,7 @@
+<%= form_for :route, :url => url_for(:controller => 'routes', :action => 'plot'), :html => {:class => "form-inline"}   do |f| %>
+  <h2>Select a Route<br><small>Map all stops on a given route and visualize their locations by alignments and boardings.</small></h2>
+  <h4><%= f.label 'Route:' %>
+  <div class="form-group">
+    <%= f.collection_select :route_number, Route.all, :route_number, :route_number, { prompt: "Please select", :selected => params[:search], hide_label: :true }, class: "input-sm", onchange: "this.form.submit()"; %> 
+  </div>
+<% end %></h4>

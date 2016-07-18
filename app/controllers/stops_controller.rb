@@ -25,7 +25,7 @@ class StopsController < ApplicationController
     @stop = Stop.find(params[:id])
     routes = @stop.calculate_routes(@stop.routes, params[:transfer])
     coordinates_array = @stop.calculate_coordinates(routes)
-    coordinate_bounds = @stop.find_coordinate_bounds(coordinates_array)
+    coordinate_bounds = @stop.find_coordinate_bounds(coordinates_array).flatten!
  
     gon.stop = [
       @stop.latitude, @stop.longitude, @stop.on_street.titlecase, @stop.cross_street.titlecase

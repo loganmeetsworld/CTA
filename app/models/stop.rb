@@ -1,8 +1,8 @@
 class Stop < ApplicationRecord
   scope :max_routes, lambda {
     joins(:routes)
-    .select('stops.*, count(routes.id) as rcount')
-    .group('stops.id')
+    .select('stops.*, count(routes.route_number) as rcount')
+    .group('stops.stop_id')
     .order('rcount DESC')
     .first
   }
@@ -75,6 +75,6 @@ class Stop < ApplicationRecord
       min_lons << stop_array.min_by { |a| a[1] }[1]
     end
 
-    return [max_lats, min_lats, max_lons, min_lons]
+    return max_lats, min_lats, max_lons, min_lons
   end
 end

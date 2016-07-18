@@ -17,7 +17,7 @@ app.Stops.prototype = {
 
   _render: function(ul, item) {
     var markup = [
-      `<a href="/stops/${item.id}"` + '><span class="on_street">' + item.on_street + ' and </span> ',
+      ['<a href="/stops/', item.id].join("") + '><span class="on_street">' + item.on_street + ' and </span> ',
       '<span class="cross_street">' + item.cross_street + '</span>',
       '<br><span class="stop_id">' + 'Stop ' + item.stop_id + '</span></a>'
     ];

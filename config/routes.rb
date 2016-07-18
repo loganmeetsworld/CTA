@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   end
   patch 'routes/plot', to: 'routes#plot'
   post 'routes/plot', to: 'routes#plot'
+  post 'stops/plot', to: 'stops#plot', as: 'plot'
 end

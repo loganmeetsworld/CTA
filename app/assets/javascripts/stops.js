@@ -17,9 +17,9 @@ app.Stops.prototype = {
 
   _render: function(ul, item) {
     var markup = [
-      ['<a href="/stops/', item.id].join("") + '><span class="on_street">' + item.on_street + ' and </span> ',
+      '<span class="on_street">' + item.on_street + ' and </span> ',
       '<span class="cross_street">' + item.cross_street + '</span>',
-      '<br><span class="stop_id">' + 'Stop ' + item.stop_id + '</span></a>'
+      '<br><span class="stop_id">' + 'Stop ' + item.stop_id + '</span>'
     ];
     return $('<li>')
       .append(markup.join(''))
@@ -27,7 +27,7 @@ app.Stops.prototype = {
   },
 
   _select: function(e, ui) {
-    this._input.val(ui.item.on_street + ' and ' + ui.item.cross_street);
+    this._input.val(ui.item.on_street + ' and ' + ui.item.cross_street + ', Stop ' + ui.item.stop_id);
     return false;
   }
 };

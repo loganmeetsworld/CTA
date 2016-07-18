@@ -4,7 +4,7 @@
 
 
 <script>
-  $(document).ready(function() {
+  window.onload = function() {
     var map = new L.Map('stopmap');
       var googleLayer = new L.Google('ROADMAP');
       map.addLayer(googleLayer);
@@ -31,5 +31,5 @@
         }).addTo(map);
       };
     });
-  });
+  };
 </script>

@@ -7,13 +7,36 @@ class StopsController < ApplicationController
     end
   end
 
+  def plot
+    @stop = Stop.find_by(stop_id: params['stops-search-txt'].split(', ')[-1].split(' ')[-1])
+    redirect_to stop_path(@stop, transfer: params[:transfer])
+  end
+
   def show
     @stop = Stop.find(params[:id])
     routes = @stop.routes
     coordinates_array = []
+    route_set = Set.new
+
+    if params[:transfer] == "1"
+      routes.each do |route|
+        route_set << route
+      end
+
+      routes.each do |route|
+        route.stops.each do |stop|
+          stop.routes.each do |r|
+            route_set << r
+          end
+        end
+      end
+      routes = route_set.to_a
+    end
+
     routes.each do |route|
       coordinates_array.push(route.stops.pluck(:latitude, :longitude, :boardings, :alightings, :on_street, :cross_street))
     end
+
     max_lats, min_lats, max_lons, min_lons = [], [], [], []
     coordinates_array.each do |stop_array|
       max_lats << stop_array.max_by { |a| a[0] }[0]

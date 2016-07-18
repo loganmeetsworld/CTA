@@ -12,4 +12,17 @@
  *
  *= require_tree .
  *= require_self
+ *= require leaflet
+ *= require jquery-ui/datepicker
  */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.leaflet-map-pane {
+    z-index: 2 !important;
+}
+
+.leaflet-google-layer {
+    z-index: 1 !important;
+}

@@ -1,0 +1,17 @@
+<header>
+  <h1>CTA Ridership October 2012</h1>
+  <h5>This site can be used to:</h5>
+  <ol>
+    <h5>Visualize routes and stops along routes in terms of average daily boardings and alightments.</h5>
+    <h5>View where you can get across the city from one stop.</h5>
+  </ol>
+  <h5>Quick Facts:</h5>
+  <ol>
+    <h5>max stops: Route #<%= @route_with_max_stops.route_number %>, <%= @route_with_max_stops.stops.count %> stops.</h5>
+    <h5>max routes: Stop #<%= @stop_with_max_routes.stop_id %>, corner of <%= @stop_with_max_routes.on_street.titlecase %> and <%= @stop_with_max_routes.cross_street.titlecase %>, <%= @stop_with_max_routes.routes.count %> routes.</h5>
+    <h5>Highest average boardings/day: Stop #<%= @max_boardings.stop_id %>, corner of <%= @max_boardings.on_street.titlecase %> and <%= @max_boardings.cross_street.titlecase %>, <%= @max_boardings.boardings %> boardings (Routes: <%= @max_boardings.routes.pluck(:route_number) %>).</h5>
+    <h5>Lowest average boardings/day: Stop #<%= @min_boardings.stop_id %>, corner of <%= @min_boardings.on_street.titlecase %> and <%= @min_boardings.cross_street.titlecase %>, <%= @min_boardings.boardings %> boardings .</h5>
+    <h5>Highest average alightings/day: Stop #<%= @max_alightings.stop_id %>, corner of <%= @max_alightings.on_street.titlecase %> and <%= @max_alightings.cross_street.titlecase %>, <%= @max_alightings.alightings %> alightings (Routes: <%= @max_alightings.routes.pluck(:route_number) %>).</h5>
+    <h5>Lowest average alightings/day: Stop #<%= @min_alightings.stop_id %>, corner of <%= @min_alightings.on_street.titlecase %> and <%= @min_alightings.cross_street.titlecase %>, <%= @min_alightings.alightings %> alightings.</h5>
+  </ol>
+</header>

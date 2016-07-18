@@ -17,8 +17,8 @@
     googleLayer = new L.Google("TERRAIN");
     map.addLayer(googleLayer);
     var coodrinates_array = gon.coordinates_array;
-    L.marker([gon.your_stop[0], gon.your_stop[1]]).addTo(map)
-      .bindPopup(gon.your_stop[2] + ' and ' + gon.your_stop[3])
+    L.marker([gon.stop[0], gon.stop[1]]).addTo(map)
+      .bindPopup(gon.stop[2] + ' and ' + gon.stop[3])
       .openPopup();
     coodrinates_array.forEach(function(markers, idx) {
       for (var i= 0; i < markers.length; i++) {
@@ -27,7 +27,7 @@
         L.circle([lat, lon], 40, {
             color: colors_array[idx],
             fillColor: colors_array[idx],
-            fillOpacity: 1
+            fillOpacity: .1
         }).addTo(map);
       };
     });

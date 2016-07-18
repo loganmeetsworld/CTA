@@ -1,15 +1,35 @@
 class StopsController < ApplicationController
-  before_action :load_info 
+  before_action :load_info, except: [:table_data]
   def index
-    @stops = Stop.all
+    respond_to do |format|
+      format.html
+      format.json { @stops = Stop.search(params[:term]) }
+    end
   end
 
-  def map
-  end
+  def show
+    @stop = Stop.find(params[:id])
+    routes = @stop.routes
+    coordinates_array = []
+    routes.each do |route|
+      coordinates_array.push(route.stops.pluck(:latitude, :longitude, :boardings, :alightings, :on_street, :cross_street))
+    end
+    max_lats, min_lats, max_lons, min_lons = [], [], [], []
+    coordinates_array.each do |stop_array|
+      max_lats << stop_array.max_by { |a| a[0] }[0]
+      min_lats << stop_array.min_by { |a| a[0] }[0]
+      max_lons << stop_array.max_by { |a| a[1] }[1]
+      min_lons << stop_array.min_by { |a| a[1] }[1]
+    end
+    gon.your_stop = [@stop.latitude, @stop.longitude, @stop.on_street.titlecase, @stop.cross_street.titlecase]
+    gon.max_lat = max_lats.max
+    gon.min_lat = min_lats.min
+    gon.max_lon = max_lons.max
+    gon.min_lon = min_lons.min
 
-  def table
+    gon.coordinates_array = coordinates_array
   end
-
+  
   private
   def load_info
     @route_with_most_stops = 
@@ -24,6 +44,11 @@ class StopsController < ApplicationController
         .group("stops.id")
         .order("scount DESC")
         .first
+
+    @stop_with_most_boardings = Stop.order('boardings DESC').limit(1).first
+    @stop_with_least_boardings = Stop.order('boardings ASC').limit(1).first
+    @stop_with_most_alightings = Stop.order('alightings DESC').limit(1).first
+    @stop_with_least_alightings = Stop.order('alightings ASC').limit(1).first
   end
 end
 

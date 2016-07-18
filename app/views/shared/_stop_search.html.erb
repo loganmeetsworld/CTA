@@ -1,12 +1,13 @@
-<%= form_tag(plot_path, :method=>'post') do %>
-<div class='stops-search'>
-  <h2>Search Stops<br><small>Map all stops on a given route and visualize their locations by alignments and boardings.</small></h2>
-  <%= text_field_tag 'stops-search-txt' %>
-  <div class='results' id='stops-search-results'></div>
-  <%= label_tag 'Transfer once: ' %>
-  <%= check_box_tag :transfer %>
-  <%= submit_tag 'Go' %>
-</div>
+<%= form_tag(plot_path, :method=>'post', :class => "form-inline") do %>
+  <div class='stops-search'>
+    <h2>Search Stops<br><small>Map all stops on a given route and visualize their locations by alignments and boardings.</small></h2>
+    <%= text_field_tag 'stops-search-txt' %>
+    <div class='results' id='stops-search-results'></div>
+  </div>
+
+    <%= label_tag 'Transfer once: ' %>
+    <%= check_box_tag :transfer %>
+    <%= submit_tag 'Go', class: "btn btn-default" %>
 <% end %>
 
 <%= content_for :script do %>

@@ -20,19 +20,15 @@ ActiveRecord::Schema.define(version: 20160717050901) do
     t.integer  "route_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["route_id"], name: "index_route_stops_on_route_id", using: :btree
-    t.index ["stop_id"], name: "index_route_stops_on_stop_id", using: :btree
   end
 
-  create_table "routes", force: :cascade do |t|
-    t.string   "route_number"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+  create_table "routes", primary_key: "route_number", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["route_number"], name: "index_routes_on_route_number", unique: true, using: :btree
   end
 
-  create_table "stops", force: :cascade do |t|
-    t.integer  "stop_id"
+  create_table "stops", primary_key: "stop_id", force: :cascade do |t|
     t.string   "on_street"
     t.string   "cross_street"
     t.integer  "boardings"
@@ -42,8 +38,8 @@ ActiveRecord::Schema.define(version: 20160717050901) do
     t.decimal  "latitude",        precision: 10, scale: 6
     t.decimal  "longitude",       precision: 10, scale: 6
     t.string   "routes"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.index ["stop_id"], name: "index_stops_on_stop_id", unique: true, using: :btree
   end
 

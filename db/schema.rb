@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20160717050901) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "routes", primary_key: "route_number", force: :cascade do |t|
+  create_table "routes", primary_key: "route_number", id: :string, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["route_number"], name: "index_routes_on_route_number", unique: true, using: :btree

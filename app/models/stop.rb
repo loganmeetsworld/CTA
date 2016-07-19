@@ -30,7 +30,7 @@ class Stop < ApplicationRecord
     .limit(1)
     .first
   }
-
+  
   has_many :route_stops
   has_many :routes, through: :route_stops
 

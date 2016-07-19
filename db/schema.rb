@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160717050901) do
+ActiveRecord::Schema.define(version: 20160715000520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "route_stops", id: false, force: :cascade do |t|
     t.integer  "stop_id"
-    t.integer  "route_id"
+    t.string   "route_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 20160717050901) do
   create_table "routes", primary_key: "route_number", id: :string, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["route_number"], name: "index_routes_on_route_number", unique: true, using: :btree
   end
 
   create_table "stops", primary_key: "stop_id", force: :cascade do |t|
@@ -40,7 +39,6 @@ ActiveRecord::Schema.define(version: 20160717050901) do
     t.string   "routes"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
-    t.index ["stop_id"], name: "index_stops_on_stop_id", unique: true, using: :btree
   end
 
 end

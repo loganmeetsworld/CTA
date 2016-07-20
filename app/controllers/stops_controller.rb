@@ -25,15 +25,15 @@ class StopsController < ApplicationController
     @stop = Stop.find(params[:id])
     routes = @stop.calculate_routes(@stop.routes, params[:transfer])
     coordinates_array = @stop.calculate_coordinates(routes)
-    coordinate_bounds = @stop.find_coordinate_bounds(coordinates_array).flatten!
+    coordinate_bounds = @stop.find_coordinate_bounds(coordinates_array)
  
     gon.stop = [
       @stop.latitude, @stop.longitude, @stop.on_street.titlecase, @stop.cross_street.titlecase
     ]
-    gon.max_lat = coordinate_bounds[0]
-    gon.min_lat = coordinate_bounds[1]
-    gon.max_lon = coordinate_bounds[2]
-    gon.min_lon = coordinate_bounds[3]
+    gon.max_lat = coordinate_bounds[0].max
+    gon.min_lat = coordinate_bounds[1].min
+    gon.max_lon = coordinate_bounds[2].max
+    gon.min_lon = coordinate_bounds[3].min
     gon.coordinates_array = coordinates_array
   end
 end

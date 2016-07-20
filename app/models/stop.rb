@@ -74,7 +74,6 @@ class Stop < ApplicationRecord
       max_lons << stop_array.max_by { |a| a[1] }[1]
       min_lons << stop_array.min_by { |a| a[1] }[1]
     end
-
     return max_lats, min_lats, max_lons, min_lons
   end
 end

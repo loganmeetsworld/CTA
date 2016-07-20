@@ -1,3 +1,5 @@
+<%= javascript_include_tag "stop_map" %>
+
 <div id="back"><%= link_to "<- Back", root_path %></div>
 <h3>Stop Number <%= @stop.stop_id %> on <%= @stop.on_street.titlecase %> and <%= @stop.cross_street.titlecase %><br><small>Routes: <%= @stop.routes.pluck(:route_number).join(', ') %></small></h3>
 <div id="stopmap"></div>

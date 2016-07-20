@@ -2,6 +2,6 @@
   <h2>Select a Route<br><small>Map all stops on a given route and visualize their locations by alignments and boardings.</small></h2>
   <h4><%= f.label 'Route:' %>
   <div class="form-group">
-    <%= f.collection_select :route_number, Route.all.order('routes.route_number DESC'), :route_number, :route_number, { prompt: "Please select", :selected => params[:search], hide_label: :true }, class: "input-sm", onchange: "this.form.submit()"; %> 
+    <%= f.collection_select :route_number, Route.all.order('routes.route_number ASC'), :route_number, :route_number, { prompt: "Please select", :selected => params[:search], hide_label: :true }, class: "input-sm", onchange: "this.form.submit()"; %> 
   </div>
 <% end %></h4>

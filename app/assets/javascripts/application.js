@@ -1,10 +1,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
 //= require leaflet
 //= require leaflet-google
 //= require jquery-ui/autocomplete
+//= require jquery-readyselector
 //= require app
 //= require stops
 //= require routes
+//= require_tree .
